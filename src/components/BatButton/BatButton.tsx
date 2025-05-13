@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import { Text, Pressable, View} from 'react-native';
 import { styles } from './BatButtonStyle';
+import * as Clipboard from 'expo-clipboard';
 import { BatTextInput } from "../../components/TextInput/TextInput";
 import generatePass from '../../services/passwordService';
 
@@ -11,6 +12,11 @@ export function BatButton() {
   function handleGenerateButton() {
     let senhagerada = generatePass
     setPass(senhagerada)
+    
+  }
+  function handleCopy() {
+    Clipboard.setStringAsync(pass);
+    alert('Senha copiada para a área de transferência');
     
   }
 
@@ -26,7 +32,7 @@ export function BatButton() {
     </Text>
     </Pressable>
       <Pressable
-    onPress={()=>{console.log('Button Pressed')}}
+    onPress={handleCopy}
     style={styles.button}>
     <Text style={styles.text}>
       copiar
